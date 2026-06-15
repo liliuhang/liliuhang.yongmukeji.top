@@ -1,0 +1,702 @@
+:root {
+    --primary-color: #00adb5;
+    --secondary-color: #393e46;
+    --background-color: #222831;
+    --text-color: #eeeeee;
+    --accent-color: #ff5722;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px; /* 缩小左右内边距，适配小屏 */
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 600px;
+    overflow: hidden;
+    margin-bottom: 20px; /* 缩小底部间距 */
+}
+/* 电脑端（>768px）收窄 */
+@media (min-width: 769px) {
+    .slider-container {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slider-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.profile-header {
+    text-align: center;
+    padding: 15px 5px; /* 缩小内边距 */
+    animation: fadeIn 1.5s ease-out;
+    z-index: 10;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar {
+    width: 100px; /* 基础尺寸缩小 */
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color); /* 边框缩小 */
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.profile-info h1 {
+    font-size: 1.8rem; /* 基础字体缩小 */
+    margin-bottom: 8px;
+    color: white;
+}
+
+.company {
+    font-size: 0.95rem; /* 基础字体缩小 */
+    color: #ccc;
+    margin-bottom: 10px;
+    line-height: 1.4; /* 优化行高，避免换行溢出 */
+}
+
+.company-link {
+    display: inline-block;
+    padding: 6px 12px; /* 缩小内边距 */
+    background: var(--primary-color);
+    color: black;
+    border-radius: 20px;
+    font-size: 0.85rem; /* 字体缩小 */
+}
+
+.company-link:hover {
+    transform: translateY(-2px);
+}
+
+/* ========== 公众号轮播：PC 收窄，手机不变 ========== */
+.wechat-slider-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px; /* 缩小底部间距 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 769px) {
+    .wechat-slider-container {
+        max-width: 900px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.wechat-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wechat-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.wechat-slide.active {
+    opacity: 1;
+}
+
+.wechat-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px; /* 基础尺寸缩小 */
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1rem; /* 字体缩小 */
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.wechat-slider-btn:hover {
+    background: var(--primary-color);
+}
+
+.prev-btn {
+    left: 10px; /* 缩小左侧间距 */
+}
+
+.next-btn {
+    right: 10px; /* 缩小右侧间距 */
+}
+
+.wechat-slider-dots {
+    position: absolute;
+    bottom: 15px; /* 缩小底部间距 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px; /* 缩小圆点间距 */
+    z-index: 10;
+}
+
+.dot {
+    width: 10px; /* 基础尺寸缩小 */
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dot.active {
+    background: var(--primary-color);
+}
+
+.section-title {
+    text-align: center;
+    margin: 30px 0 20px; /* 缩小上下间距 */
+    font-size: 1.6rem; /* 基础字体缩小 */
+    position: relative;
+    color: white;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px; /* 缩小下划线宽度 */
+    height: 3px;
+    background: var(--primary-color);
+    margin: 8px auto 0;
+    border-radius: 3px;
+}
+
+.wechat-section {
+    margin-bottom: 30px; /* 缩小底部间距 */
+}
+
+.loading, .error-message {
+    text-align: center;
+    padding: 15px; /* 缩小内边距 */
+    color: #aaa;
+}
+
+.loading i, .error-message i {
+    margin-right: 8px;
+}
+
+.wechat-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 缩小最小宽度 */
+    gap: 20px; /* 缩小网格间距 */
+}
+
+.wechat-post {
+    background: var(--secondary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wechat-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.post-image {
+    width: 100%;
+    height: 160px; /* 缩小图片高度 */
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 15px; /* 缩小内边距 */
+}
+
+.post-content h3 {
+    margin-bottom: 8px;
+    color: white;
+    font-size: 1rem; /* 字体缩小 */
+}
+
+.post-meta {
+    font-size: 0.85rem; /* 字体缩小 */
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px; /* 缩小内边距 */
+    background: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem; /* 字体缩小 */
+}
+
+.read-more:hover {
+    background: var(--accent-color);
+}
+
+.follow-button {
+    text-align: center;
+    margin-top: 20px; /* 缩小顶部间距 */
+}
+
+.follow-button a {
+    display: inline-block;
+    padding: 10px 20px; /* 缩小内边距 */
+    background: #07c160;
+    color: white;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 0.9rem; /* 字体缩小 */
+}
+
+.follow-button a:hover {
+    background: #06ad56;
+    transform: scale(1.05);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px; /* 缩小图标间距 */
+    margin: 20px 0; /* 缩小上下间距 */
+    align-items: center;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* 缩小图标尺寸 */
+    height: 50px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 1.2rem; /* 字体缩小 */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.social-icon i {
+    position: relative;
+    z-index: 2;
+}
+
+.social-icon:hover::before {
+    transform: scale(1);
+}
+
+.social-icon:hover i {
+    transform: rotateY(360deg);
+    color: white;
+}
+
+.social-icon i {
+    transition: transform 0.6s ease;
+}
+
+.more-platform-link {
+    display: inline-block;
+    padding: 8px 15px; /* 缩小内边距 */
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 30px;
+    font-size: 0.8rem; /* 字体缩小 */
+    transition: all 0.3s ease;
+    z-index: 10;
+    position: relative;
+    margin-top: 5px;
+}
+
+.more-platform-link:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.footer {
+    background: #1a1a1a;
+    padding: 30px 0 15px; /* 缩小内边距 */
+    margin-top: 30px; /* 缩小顶部间距 */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.friend-links {
+    flex: 1;
+    min-width: 200px; /* 缩小最小宽度 */
+    margin-bottom: 15px; /* 缩小底部间距 */
+}
+
+.friend-links h3 {
+    color: white;
+    margin-bottom: 10px; /* 缩小底部间距 */
+    font-size: 1.1rem; /* 字体缩小 */
+}
+
+.friend-links ul {
+    list-style: none;
+}
+
+.friend-links li {
+    margin-bottom: 6px; /* 缩小底部间距 */
+}
+
+.friend-links a {
+    color: #aaa;
+    position: relative;
+    padding-left: 12px; /* 缩小左侧间距 */
+    font-size: 0.9rem; /* 字体缩小 */
+}
+
+.friend-links a::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.friend-links a:hover {
+    color: white;
+    padding-left: 16px;
+}
+
+.copyright {
+    flex: 1;
+    text-align: right;
+    color: #aaa;
+    font-size: 0.85rem; /* 字体缩小 */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: modalFadeIn 0.3s ease-out;
+    padding: 10px; /* 新增内边距，避免模态框溢出 */
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-color);
+    padding: 20px; /* 缩小内边距 */
+    border-radius: 10px;
+    text-align: center;
+    max-width: 95%; /* 提高最大宽度占比 */
+    width: 350px; /* 缩小固定宽度 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px; /* 缩小顶部间距 */
+    right: 15px; /* 缩小右侧间距 */
+    font-size: 24px; /* 字体缩小 */
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: white;
+}
+
+#qr-code-image {
+    width: 200px; /* 缩小二维码尺寸 */
+    height: 200px;
+    margin: 15px 0; /* 缩小上下间距 */
+    border: 4px solid white; /* 缩小边框 */
+}
+
+/* 响应式设计 - 平板/大屏手机 (768px 以下) */
+@media (max-width: 768px) {
+    .slider-container {
+        max-height: 350px; /* 进一步缩小 */
+    }
+
+    .wechat-slider-container {
+        max-height: 280px; /* 进一步缩小 */
+    }
+
+    .avatar {
+        width: 90px; /* 进一步缩小 */
+        height: 90px;
+    }
+
+    .profile-info h1 {
+        font-size: 1.6rem; /* 进一步缩小 */
+    }
+
+    .section-title {
+        font-size: 1.4rem; /* 进一步缩小 */
+        margin: 25px 0 15px;
+    }
+
+    .wechat-posts, .blog-posts {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .copyright {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .more-platform-link {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        margin-top: 8px;
+    }
+
+    .wechat-slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* 新增：524px 以下极小屏适配（核心解决 524×901 显示问题） */
+@media (max-width: 524px) {
+    .slider-container {
+        max-height: 280px; /* 极致缩小轮播高度 */
+        aspect-ratio: 4 / 3; /* 调整宽高比，适配竖屏 */
+    }
+
+    .wechat-slider-container {
+        max-height: 220px; /* 极致缩小公众号轮播高度 */
+        aspect-ratio: 4 / 3; /* 调整宽高比，适配竖屏 */
+    }
+
+    .avatar {
+        width: 80px; /* 极致缩小头像 */
+        height: 80px;
+    }
+
+    .profile-info h1 {
+        font-size: 1.4rem; /* 极致缩小标题 */
+        line-height: 1.2; /* 优化行高 */
+    }
+
+    .company {
+        font-size: 0.85rem; /* 极致缩小公司名称 */
+        padding: 0 5px; /* 增加左右内边距，避免溢出 */
+    }
+
+    .company-link {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        white-space: nowrap; /* 防止按钮文字换行 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90%; /* 限制按钮宽度 */
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin: 20px 0 15px;
+    }
+
+    .social-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        width: 90%; /* 模态框宽度自适应 */
+        padding: 15px;
+    }
+
+    #qr-code-image {
+        width: 180px; /* 极致缩小二维码 */
+        height: 180px;
+    }
+
+    .wechat-slider-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .prev-btn {
+        left: 5px;
+    }
+
+    .next-btn {
+        right: 5px;
+    }
+
+    .follow-button a {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+.hover-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.hover-effect:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
